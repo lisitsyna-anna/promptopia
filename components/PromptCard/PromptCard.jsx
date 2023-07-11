@@ -4,14 +4,13 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
+import userImage from '../../public/assets/images/user.png';
 
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const [copied, setCopied] = useState('');
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
-
-  console.log(post.tag);
 
   const handleCopy = () => {
     setCopied(post.prompt);
@@ -35,7 +34,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           onClick={handleProfileClick}
         >
           <Image
-            src={post.creator.image}
+            src={post.creator.image || userImage}
             alt="user_image"
             width={40}
             height={40}
